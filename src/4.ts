@@ -30,10 +30,6 @@ abstract class House {
     this.door = false;
   }
 
-  getKey(): Key {
-    return this.key;
-  }
-
   public abstract openDoor(obj: Key): void;
 }
 
@@ -42,7 +38,7 @@ class MyHouse extends House {
 
   public openDoor(key: Key): void {
     console.log("An attempt to open the door...");
-    if (key !== this.key) {
+    if (key.getSignature() !== this.key.getSignature()) {
       console.log("You have invalid key!");
       return;
     }
@@ -55,8 +51,6 @@ console.log("🚀 ~ key:", key);
 
 const house = new MyHouse(key);
 console.log("🚀 ~ house:", house);
-const houseKey = house.getKey();
-console.log("🚀 ~ houseKey:", houseKey);
 
 const max = new Person(key, "Max");
 console.log("🚀 ~ person:", max);
